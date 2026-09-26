@@ -1,0 +1,27 @@
+{
+  "name": "agent-services-marketplace",
+  "private": true,
+  "packageManager": "pnpm@10.15.0",
+  "scripts": {
+    "dev": "pnpm --filter @asm/api --filter @asm/lookup-service --filter @asm/extraction-service --filter @asm/catalog-mcp --filter @asm/web --parallel dev",
+    "dev:stack": "docker compose up --build",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "migrate": "tsx packages/db/src/cli.ts migrate",
+    "seed": "tsx packages/db/src/cli.ts seed",
+    "typecheck": "tsc -b --pretty false"
+  },
+  "devDependencies": {
+    "@asm/budget-policy": "workspace:*",
+    "@asm/invocation-domain": "workspace:*",
+    "@asm/mpp-adapter": "workspace:*",
+    "@asm/reconciliation": "workspace:*",
+    "@asm/shared": "workspace:*",
+    "@asm/signer-interface": "workspace:*",
+    "@asm/x402-adapter": "workspace:*",
+    "@types/node": "^24.5.2",
+    "tsx": "^4.20.5",
+    "typescript": "^5.9.2",
+    "vitest": "^3.2.4"
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "d-s1": {
+    "document_id": "d-s1",
+    "supplier_id": "s1",
+    "title": "Northwind quality dossier",
+    "pages": [
+      "Page 1 — Incoming inspection uses AQL 1.0 sampling on connectors and PCB lots.",
+      "Page 2 — Traceability is lot-plus-reel. Nonconforming material is quarantined within 4 hours.",
+      "Page 3 — Corrective actions from the last four quarters closed in 18 days on average."
+    ]
+  },
+  "d-s3": {
+    "document_id": "d-s3",
+    "supplier_id": "s3",
+    "title": "Atlas mill certificate pack",
+    "pages": [
+      "Page 1 — Heat 4419 chemistry is within AMS 5643 limits for 17-4PH.",
+      "Page 2 — Tensile and hardness results exceed the purchase specification by 6%.",
+      "Page 3 — Export classification is EAR99. Certificates are valid for 24 months."
+    ]
+  },
+  "d-s5": {
+    "document_id": "d-s5",
+    "supplier_id": "s5",
+    "title": "Vesper SDS extract",
+    "pages": [
+      "Page 1 — Product is a flammable solvent blend stored under nitrogen.",
+      "Page 2 — Occupational exposure limit is 25 ppm TWA. Local exhaust is required.",
+      "Page 3 — Waste must be handled as hazardous. Spill kits are staged at each dock."
+    ]
+  }
+}
