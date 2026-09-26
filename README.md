@@ -1,8 +1,10 @@
 # Agent Services Marketplace
 
-A research agent that discovers owned services over MCP, pays with x402 V2 exact or MPP charge/session, and keeps spending, delivery, and settlement independently accountable.
+A research-service demo with an MCP-style catalog, local x402 V2 exact and MPP charge/session fixtures, and separate accounting for spending, delivery, and settlement. The default research loop calls the invocation coordinator directly.
 
-> **[Read the full documentation](docs/DEMO.md)**
+> **[Read the full documentation](docs/index.md)**
+
+Built with TypeScript, Fastify, and Next.js. The current runtime uses in-memory storage and local payment fixtures.
 
 ## Getting Started
 
@@ -16,7 +18,9 @@ pnpm --filter @asm/lookup-service --filter @asm/extraction-service --filter @asm
 
 Open http://localhost:3000 and run Demo A. Optional Postgres/Redis: `docker compose up postgres redis`.
 
-Default settlement is **simulated**. Receipts are labeled `settlement_kind: "simulated"` and are never displayed as chain transactions.
+Default settlement is **simulated**. Receipt views label it explicitly. The current `testnet` setting does not broadcast transactions; see [implementation limits](docs/PINS.md#implementation-status).
+
+See [Getting Started](docs/getting-started.md) for prerequisites, cloning, configuration, and verification.
 
 ## Quick Example
 
@@ -44,3 +48,5 @@ curl -X POST http://localhost:3001/v1/tasks/task_.../run \
 # Inspect spend and purchased sources
 curl http://localhost:3001/v1/tasks/task_.../report
 ```
+
+Replace `task_...` with `task.id` from the create response. The budget covers service charges in the fixture, not a funded wallet or live network fees.
