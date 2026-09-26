@@ -1,0 +1,14 @@
+{
+  "files": [],
+  "references": [
+    { "path": "packages/shared" },
+    { "path": "packages/budget-policy" },
+    { "path": "packages/invocation-domain" },
+    { "path": "packages/signer-interface" },
+    { "path": "packages/x402-adapter" },
+    { "path": "packages/mpp-adapter" },
+    { "path": "packages/result-store" },
+    { "path": "packages/reconciliation" },
+    { "path": "packages/db" }
+  ]
+}

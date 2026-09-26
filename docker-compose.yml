@@ -1,0 +1,132 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: asm
+      POSTGRES_PASSWORD: asm
+      POSTGRES_DB: asm
+    ports:
+      - "5432:5432"
+    volumes:
+      - asm_pg:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U asm -d asm"]
+      interval: 2s
+      timeout: 5s
+      retries: 20
+
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 2s
+      timeout: 3s
+      retries: 20
+
+  lookup-service:
+    build:
+      context: .
+      dockerfile: docker/node.Dockerfile
+      args:
+        APP_DIR: apps/lookup-service
+    environment:
+      PORT: 3002
+      SETTLEMENT_MODE: ${SETTLEMENT_MODE:-simulated}
+      SIGNER_SECRET: ${SIGNER_SECRET:-dev-signer-secret-change-me}
+      PAYEE_ADDRESS: ${PAYEE_ADDRESS:-0x2222222222222222222222222222222222222222}
+      X402_NETWORK: eip155:84532
+      X402_ASSET: 0x036CbD53842c5426634e7929541eC2318f3dCF7e
+      X402_SCHEME: exact
+      MPP_CHAIN_ID: "4217"
+      MPP_CURRENCY: 0x20c0000000000000000000000000000000000000
+    ports:
+      - "3002:3002"
+    command: ["pnpm", "--filter", "@asm/lookup-service", "dev"]
+
+  extraction-service:
+    build:
+      context: .
+      dockerfile: docker/node.Dockerfile
+      args:
+        APP_DIR: apps/extraction-service
+    environment:
+      PORT: 3003
+      SETTLEMENT_MODE: ${SETTLEMENT_MODE:-simulated}
+      SIGNER_SECRET: ${SIGNER_SECRET:-dev-signer-secret-change-me}
+      PAYEE_ADDRESS: ${PAYEE_ADDRESS:-0x2222222222222222222222222222222222222222}
+      MPP_CHAIN_ID: "4217"
+      MPP_CURRENCY: 0x20c0000000000000000000000000000000000000
+    ports:
+      - "3003:3003"
+    command: ["pnpm", "--filter", "@asm/extraction-service", "dev"]
+
+  api:
+    build:
+      context: .
+      dockerfile: docker/node.Dockerfile
+      args:
+        APP_DIR: apps/api
+    environment:
+      PORT: 3001
+      DATABASE_URL: postgres://asm:asm@postgres:5432/asm
+      REDIS_URL: redis://redis:6379
+      SETTLEMENT_MODE: ${SETTLEMENT_MODE:-simulated}
+      DEMO_USER_ID: demo-user
+      SIGNER_SECRET: ${SIGNER_SECRET:-dev-signer-secret-change-me}
+      PAYER_ADDRESS: ${PAYER_ADDRESS:-0x1111111111111111111111111111111111111111}
+      PAYEE_ADDRESS: ${PAYEE_ADDRESS:-0x2222222222222222222222222222222222222222}
+      LOOKUP_SERVICE_URL: http://lookup-service:3002
+      EXTRACTION_SERVICE_URL: http://extraction-service:3003
+      MCP_URL: http://catalog-mcp:3004
+      X402_NETWORK: eip155:84532
+      X402_ASSET: 0x036CbD53842c5426634e7929541eC2318f3dCF7e
+      X402_SCHEME: exact
+      MPP_CHAIN_ID: "4217"
+      MPP_CURRENCY: 0x20c0000000000000000000000000000000000000
+    ports:
+      - "3001:3001"
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      lookup-service:
+        condition: service_started
+      extraction-service:
+        condition: service_started
+    command: ["pnpm", "--filter", "@asm/api", "dev"]
+
+  catalog-mcp:
+    build:
+      context: .
+      dockerfile: docker/node.Dockerfile
+      args:
+        APP_DIR: apps/catalog-mcp
+    environment:
+      PORT: 3004
+      API_URL: http://api:3001
+    ports:
+      - "3004:3004"
+    depends_on:
+      - api
+    command: ["pnpm", "--filter", "@asm/catalog-mcp", "dev"]
+
+  web:
+    build:
+      context: .
+      dockerfile: docker/node.Dockerfile
+      args:
+        APP_DIR: apps/web
+    environment:
+      PORT: 3000
+      NEXT_PUBLIC_API_URL: http://localhost:3001
+    ports:
+      - "3000:3000"
+    depends_on:
+      - api
+    command: ["pnpm", "--filter", "@asm/web", "dev"]
+
+volumes:
+  asm_pg:

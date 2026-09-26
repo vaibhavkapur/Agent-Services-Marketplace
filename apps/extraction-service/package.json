@@ -1,0 +1,14 @@
+{
+  "name": "@asm/extraction-service",
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "tsx src/index.ts"
+  },
+  "dependencies": {
+    "@asm/shared": "workspace:*",
+    "@asm/mpp-adapter": "workspace:*",
+    "@fastify/cors": "^11.1.0",
+    "fastify": "^5.6.0"
+  }
+}

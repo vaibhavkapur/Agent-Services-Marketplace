@@ -1,0 +1,19 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+}
+
+body {
+  @apply bg-ink text-slate-100 antialiased;
+  background-image:
+    radial-gradient(circle at top left, rgba(228, 177, 90, 0.12), transparent 32%),
+    radial-gradient(circle at 80% 0%, rgba(125, 222, 196, 0.1), transparent 28%);
+  min-height: 100vh;
+}
+
+a {
+  @apply text-mint;
+}

@@ -1,0 +1,67 @@
+[
+  {
+    "id": "s1",
+    "name": "Northwind Components",
+    "category": "electronics",
+    "region": "Midwest",
+    "lead_time_days": 6,
+    "moq": 250,
+    "unit_price_usd": 4.2,
+    "on_time_rate": 0.97,
+    "certifications": ["ISO 9001", "RoHS"],
+    "risk": "low",
+    "notes": "Stable PCB and connector supply with documented lot traceability."
+  },
+  {
+    "id": "s2",
+    "name": "Helios Logistics",
+    "category": "freight",
+    "region": "Gulf Coast",
+    "lead_time_days": 4,
+    "moq": 1,
+    "unit_price_usd": 18.5,
+    "on_time_rate": 0.91,
+    "certifications": ["C-TPAT"],
+    "risk": "medium",
+    "notes": "Fast ocean-to-rail handoff; weekend capacity is limited."
+  },
+  {
+    "id": "s3",
+    "name": "Atlas Precision Metals",
+    "category": "materials",
+    "region": "Great Lakes",
+    "lead_time_days": 12,
+    "moq": 500,
+    "unit_price_usd": 11.8,
+    "on_time_rate": 0.94,
+    "certifications": ["ISO 14001", "AS9100"],
+    "risk": "low",
+    "notes": "Aerospace-grade alloys with mill certificates on every heat."
+  },
+  {
+    "id": "s4",
+    "name": "Harborline Packaging",
+    "category": "packaging",
+    "region": "Northeast",
+    "lead_time_days": 8,
+    "moq": 1000,
+    "unit_price_usd": 0.62,
+    "on_time_rate": 0.88,
+    "certifications": ["FSC"],
+    "risk": "medium",
+    "notes": "Competitive corrugate pricing; recycled content varies by mill."
+  },
+  {
+    "id": "s5",
+    "name": "Vesper Chemicals",
+    "category": "process",
+    "region": "Pacific Northwest",
+    "lead_time_days": 15,
+    "moq": 200,
+    "unit_price_usd": 27.4,
+    "on_time_rate": 0.86,
+    "certifications": ["REACH", "ISO 45001"],
+    "risk": "high",
+    "notes": "Specialty solvents with tight purity specs and longer QA hold."
+  }
+]

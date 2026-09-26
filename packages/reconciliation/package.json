@@ -1,0 +1,13 @@
+{
+  "name": "@asm/reconciliation",
+  "version": "0.1.0",
+  "type": "module",
+  "main": "./src/index.ts",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "dependencies": {
+    "@asm/invocation-domain": "workspace:*",
+    "@asm/shared": "workspace:*"
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "name": "@asm/x402-adapter",
+  "version": "0.1.0",
+  "type": "module",
+  "main": "./src/index.ts",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "dependencies": {
+    "@asm/shared": "workspace:*",
+    "@asm/signer-interface": "workspace:*"
+  }
+}
