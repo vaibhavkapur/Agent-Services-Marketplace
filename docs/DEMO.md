@@ -1,5 +1,7 @@
 # Demo scenarios
 
+[Documentation home](index.md)
+
 All supplier, document, and price data are fixtures dated 25 September 2026.
 
 ## A — Paid research
